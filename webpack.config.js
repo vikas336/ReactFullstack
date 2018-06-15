@@ -1,9 +1,11 @@
 var path = require("path");
+var webpack = require("webpack")
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
 
-    devtool: 'eval-source-map',
+  mode: 'development',
+  devtool: 'cheap-module-eval-source-map',
 
   // We add an entry to connect to the hot loading middleware from
   // the page
@@ -14,11 +16,13 @@ module.exports = {
   output: {
     path: path.join(__dirname, '/dist/'),
     filename: 'bundle.js',
-    publicPath: '/static'
+    publicPath: '/static/'  
   },
 
   // This plugin activates hot loading
-  plugins: [
+  plugins: 
+  [
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
   ],
   module: {
@@ -26,7 +30,7 @@ module.exports = {
     {
       test: /\.js?$/,
       exclude: /node_modules/,
-      use: ['babel-loader']
+      loaders: ['babel-loader'],
     }, 
     {
       test: /\.css?$/,
