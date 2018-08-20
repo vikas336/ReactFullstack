@@ -10,12 +10,6 @@ var config = require('./webpack.config')
 var path = require('path')
 var app = new express();
 
-
-app.get("/", function(req,res)
-{
-    res.sendFile(__dirname + '/public/index.html')
-})
-
 var compiler = webpack(config)
 
 app.use(webpackDevMiddleware(compiler, {
@@ -39,3 +33,9 @@ app.listen(port,function(error)
 })
 
 app.use(express.static(__dirname + '/public/'));
+
+// Added * to catch all routes after /. Always place this at the bottom so other routes can be taken care off, e.g. static files or POST/GET routes.
+app.get("/*", function(req,res)
+{
+    res.sendFile(__dirname + '/public/index.html')
+})
