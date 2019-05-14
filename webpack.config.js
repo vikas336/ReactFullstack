@@ -1,6 +1,5 @@
 var path = require("path");
 var webpack = require("webpack")
-var HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
 
@@ -16,26 +15,26 @@ module.exports = {
   output: {
     path: path.join(__dirname, '/dist/'),
     filename: 'bundle.js',
-    publicPath: '/static/'  
+    publicPath: '/static/'
   },
 
   // This plugin activates hot loading
-  plugins: 
-  [
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-  ],
+  plugins:
+    [
+      new webpack.optimize.OccurrenceOrderPlugin(),
+      new webpack.HotModuleReplacementPlugin(),
+    ],
   module: {
-    rules:[
-    {
-      test: /\.js?$/,
-      exclude: /node_modules/,
-      loaders: ['babel-loader'],
-    }, 
-    {
-      test: /\.css?$/,
-      use: ["style-loader", "css-loader"] // This are the loaders
-    }
+    rules: [
+      {
+        test: /\.js?$/,
+        exclude: /node_modules/,
+        loaders: ['babel-loader'],
+      },
+      {
+        test: /\.css?$/,
+        use: ["style-loader", "css-loader"] // These are the loaders for css and style
+      }
     ]
   }
 }
